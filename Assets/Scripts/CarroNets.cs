@@ -5,30 +5,33 @@ using UnityEngine;
 public class CarroNets : MonoBehaviour
 {
 	public GameObject netbook;
+	public Transform spawn;
 
-
+	bool spawnable;
     // Start is called before the first frame update
     void Start()
     {
-        
+		spawnable = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-      
+      if (Input.GetKeyDown(KeyCode.N) && spawnable == true)
+		{
+			Instantiate(netbook);
+			netbook.transform.position = spawn.transform.position;
+			
+		}
+		
     }
 
 	void OnTriggerEnter(Collider other)
 	{
 		
-		if (other.gameObject.name == "FPSController")
+		if (other.gameObject.tag == "Player")
 		{
-			//if (Input.GetKeyDown(KeyCode.N))
-			//{
-				Instantiate(netbook).transform.position = new Vector3(-3, 1, 4);
-
-			//}
+			spawnable = true;
 		}
 	}
 }
